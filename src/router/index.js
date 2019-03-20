@@ -5,16 +5,23 @@ import gram from '@/view/gram'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'index',
-      component: index
-    },
-     {
-            path: '/gram',
-            name: 'gram',
-            component: gram
-        }
-  ]
+	routes: [{
+			path: '/',
+			name: 'index',
+			component: index
+		},
+		{
+			path: '/gram',
+			name: 'gram',
+			component: gram
+		},{
+			path: '/speech',
+			name: 'speech',
+			component:  () => import('@/view/speech')
+		},{
+			path: '/balance',
+			name: 'balance',
+			component:  () => import('@/view/balance')
+		},
+	]
 })

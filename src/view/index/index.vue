@@ -1,5 +1,5 @@
 <template>
-	<div style="margin-right: 5%;">
+	<div>
 		<Row type="flex" justify="center" class="code-row-bg">
 			<Col span="8">
 			<Card style="width:320px">
@@ -15,7 +15,7 @@
 			<i-col :xs="12" :md="8" :lg="4" offset="2" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" style="height: 120px;padding-bottom: 10px;">
 				<infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">
 					<p>
-					    <router-link to='/gram'>{{ infor.title }}</router-link>
+					    <router-link :to="{path:infor.url}">{{ infor.title }}</router-link>
 					</p>
 				</infor-card>
 			</i-col>
@@ -34,23 +34,25 @@
 			return {
 				msg: 'Welcome to Your Vue.js App',
 				inforCardData: [{
-						title: '新增用户',
+						title: '金融智脑',
 						icon: 'ios-outlet-outline',
-						count: 803,
-						color: '#2d8cf0'
+						color: '#2d8cf0',
+						url :'/gram'
 					},
 					{
-						title: '累计点击',
-						icon: 'md-locate',
-						count: 232,
-						color: '#19be6b'
+						title: '语音测试',
+						icon: 'md-mic',
+						color: '#19be6b',
+						url :'/speech'
+						
 					},
 					{
-						title: '新增问答',
+						title: '负载均衡测试1',
 						icon: 'md-help-circle',
-						count: 142,
-						color: '#ff9900'
+						color: '#ff9900',
+						url :'/balance',
 					},
+					/*
 					{
 						title: '分享统计',
 						icon: 'md-share',
@@ -68,7 +70,7 @@
 						icon: 'md-map',
 						count: 14,
 						color: '#9A66E4'
-					}
+					}*/
 				],
 			}
 		}
