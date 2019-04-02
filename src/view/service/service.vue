@@ -5,15 +5,14 @@
 				<div :style="[screeFront]">
 					<table style="background-color: #f9fbee;width: 99%;height: 100%;">
 						<tr style="height: 10%;">
-							<td colspan="2" id="bottomId"  style="text-align: center;width: 80%;font-size: 1.1rem;">{{screenShow}}</td>
-							<!-- <td ></td> -->
+							<td data-v-501350ca="" colspan="2" id="bottomId" style="text-align: center; width: 80%; font-size: 1.1rem;background-color: cornsilk;">答案内容,显示文字部分</td>
 							<td align="right">
-								<img v-if="btnCancel.show" :src="btnCancel.src" @click="backIndex()" style="cursor:pointer;"></img>
+								<img data-v-501350ca="" src="http://116.228.202.222:18088/resource/images/common-home.png" style="cursor: pointer;">
 							</td>
 						</tr>
-						<tr style="height: 60%">
-							<td style="width: 10%;" id="btnPreId">
-								<img  v-show="btnPre.show" :src="btnPre.src" @click="goMessageMethod(btnPre.goMessage)" style="cursor:pointer;"></img>
+						<tr style="height: 60%;">
+							<td style="width: 10%;background-color: antiquewhite;" id="btnPreId">
+								<img data-v-714d8dbe="" style="cursor: pointer;" src="http://116.228.202.222:18088/resource/images/common-pre-button.png">
 							</td>				
 														
 							<td id="centerId1" style="width: 60%;" align="center" key="index" v-if="btnCenters.type=='btns'">			
@@ -23,7 +22,7 @@
 								<!-- <img :src="img.src" @click="goMessageMethod(img.goMessage)" style="cursor:pointer;">{{img.textShow}}</img>&nbsp; -->
 							</span>	
 							</td>
-							<td id="centerId2" style="width: 60%;" align="center" v-else-if="btnCenters.type=='imgs'">	
+							<td id="centerId2" style="width: 60%;background-color: #0086B3;" align="center" v-else-if="btnCenters.type=='imgs'">	
 								<span  v-for="img in btnCenters.imgs">
 									<img :src="img.src" style="max-width:750px;max-height:400px;"></img>&nbsp;
 								</span>
@@ -41,26 +40,24 @@
 							<td id="centerId4" style="width: 60%;" align="center" v-else>	
 								
 							</td>							
-							<td style="width: 10%;" id="nextId" >
-								<img v-show="btnNext.show" :src="btnNext.src" @click="goMessageMethod(btnNext.goMessage)" style="cursor:pointer;"></img>
+							<td style="width: 10%;background-color: antiquewhite;" id="nextId" >
+								<img data-v-714d8dbe="" style="cursor: pointer;" src="http://116.228.202.222:18088/resource/images/common-next-button.png">
 							</td>
 						</tr>
-						<tr style="height: 10%;">
+						<tr style="height: 10%;background-color: #47CB89;">
 							<td></td>
-							<td id="bottomId" valign="middle" align="center" >
-								<span v-for="botton in btnBottoms">
-									<input :style="{background:'url('+botton.src+')'}"  class="bottom-btn"
-									:value="botton.textShow" @click="goMessageMethod(botton.goMessage)"></input>&nbsp;
-								</span>
+								<td data-v-714d8dbe="" id="bottomId" valign="middle" align="center">
+									<span data-v-714d8dbe=""><input data-v-714d8dbe="" value="灵活型" class="bottom-btn" style="background: url(&quot;http://116.228.202.222:18088/resource/images/common-bottom-button.png&quot;);">&nbsp;
+							</span><span data-v-714d8dbe=""><input data-v-714d8dbe="" value="固定型" class="bottom-btn" style="background: url(&quot;http://116.228.202.222:18088/resource/images/common-bottom-button.png&quot;);">&nbsp;
+							</span></td>
 								
-							</td>
 							<td></td>
 						</tr>
 					</table>
 				</div>
 				<div>
 					<div style="float: left;">
-						<!-- <Icon title="麦克风" :type="openmicro?'ios-mic':'ios-mic-off'" @click.native="change('openmicro')" size="24" :class="[{'open':openmicro}]" :style="{margin: '0 0px 0 10px'}" /> -->
+						<Icon title="麦克风" :type="openmicro?'ios-mic':'ios-mic-off'" @click.native="change('openmicro')" size="24" :class="[{'open':openmicro}]" :style="{margin: '0 0px 0 10px'}" />
 						<Icon title="扬声器" :type="openvoice?'md-volume-up':'md-volume-off'" size="24" @click.native="change('openvoice')" :class="[{'open':openvoice}]" :style="{margin: '0 10px'}" />
 					</div>
 					<div class="iconRight" style="float: right;">
@@ -103,11 +100,10 @@
 				openvoice: false,
 				queryHistory: [],
 				userId: "",
-				deviceId:"gram-0001",
+				deviceId:"data-gram-0001",
 				platformId:99,
 				queryMessage: '',
-				imgServer: this.config.server.imgServerUrl,
-				url : this.config.server.queryServerUrl,
+				imgServer: '',
 				btnNext:{show:false,textShow:"",goMessage:"",src:""},
 				btnPre:{show:false,textShow:"",goMessage:"",src:""},
 				btnCancel:{show:false,textShow:"",goMessage:"",src:""},
@@ -118,10 +114,13 @@
 				screeFront: {}, //屏幕样式
 				inputFront: {}, // 输入样式
 				siderFront:{}, //历史记录
+
 			}
 		},
 		created() {
 			this.userId = this.guid(); //用户编号
+			this.deviceId = this.guid();
+			this.getInfo(); // 获取配置信息
 		},
 		mounted() {
 			var height = window.screen.availHeight;
@@ -141,21 +140,21 @@
 			change(flag) {
 				this[flag] = !this[flag]
 			},
-			/* microphoneStop(blob) {
+			microphoneStop(blob) {
 				var begin =new Date().getTime();
 				var reader = new FileReader();
 				reader.readAsDataURL(blob);
 				var $=this.$http;
 				var start =new Date().getTime();
 				// 科大讯飞
-				 reader.onload = function (e) { 					
+				/* reader.onload = function (e) { 					
 					var baseCode= this.result.substring(this.result.indexOf(',')+1);//.substring(this.result.indexOf(',')+1);
 					$.post('iat/voiceQuery',{userId:this.userId,voiceBaseCode:baseCode}).then(function(data){
 						var end =new Date().getTime();
 						console.log("讯飞耗时:"+(end-begin)/1000.0)
 						this.getRespData(data.body,data.body.question);
 					});
-				}; 
+				}; */
 				 var begin2 = new Date().getTime();
 				// 百度云
 				let formData = new FormData();
@@ -167,16 +166,22 @@
 					console.log("百度耗时:" + (end - begin2) / 1000.0);
 					this.getRespData(data.body,data.body.question);
 				}); 
-			}, */
+			},
+			getInfo(){
+				this.$http.post('datagram/info').then(function(res){
+					this.imgServer= res.body.imgServer;
+					console.log(this.imgServer);
+				})
+			},
 			query() {
 				var queryMessage=this.queryMessage.replace("\n","").trim();
 				if(queryMessage==undefined||queryMessage==null){
 					this.$Message.info('输入不能为空!');
 					return ;
 				}			
-				var data={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId};
+				var data={'deviceId':this.deviceId,'query':queryMessage};
 				this.queryMessage="";
-				this.$http.post(this.url+'query',JSON.stringify(data)).then(function(data) {
+				this.$http.post('query',JSON.stringify(data)).then(function(data) {
 					console.log(data);
 					this.getRespData(data.body,queryMessage);					
 				});
@@ -402,3 +407,4 @@
 		font-size: 22px;
 	}
 </style>
+

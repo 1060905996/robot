@@ -7,11 +7,18 @@ import VueResource from 'vue-resource'
 
 import iView from 'iview/dist/iview.min.js'
 import 'iview/dist/styles/iview.css'    // 使用 CSS
+
+import './assets/iconfont/iconfont.css'  //使用自定义图标
+
+import config from  './config'
+
+Vue.prototype.config = config;
+console.log(config)
 Vue.use(iView)
 Vue.use(VueResource)
 
 Vue.config.productionTip = false
-//Vue.http.options.root='http://116.228.202.222:18180/'
+Vue.http.options.root='http://116.228.202.222:18180/'
 //Vue.http.options.root='http://localhost:8180/'
 //Vue.http.options.emulateJSON = true;
 Vue.http.options.headers = {

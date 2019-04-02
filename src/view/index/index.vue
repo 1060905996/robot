@@ -4,13 +4,12 @@
 			<Col span="8">
 			<Card style="width:320px">
 				<div style="text-align:center">
-					<img src="../../assets/logo.png">
-					<h3>A high quality UI Toolkit based on Vue.js</h3>
+					<img src="../../assets/xiaowen.png">
+					<h3>DMC 金融智脑</h3>
 				</div>
 			</Card>
 			</Col>
 		</Row>
-
 		<Row :gutter="20">
 			<i-col :xs="12" :md="8" :lg="4" offset="2" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" style="height: 120px;padding-bottom: 10px;">
 				<infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">
@@ -32,34 +31,38 @@
 		},
 		data() {
 			return {
-				msg: 'Welcome to Your Vue.js App',
+				msg: 'Welcome to DMC Robot',
 				inforCardData: [{
 						title: '金融智脑',
 						icon: 'ios-outlet-outline',
 						color: '#2d8cf0',
 						url :'/gram'
-					},
-					{
+					} ,{
+						title: '语音客服',
+						icon: ' iconfont icon-head-set',
+						color: '#9A66E4',
+						url :'/chat'
+					} 
+					/* {
 						title: '语音测试',
 						icon: 'md-mic',
 						color: '#19be6b',
 						url :'/speech'
 						
-					},
+					}, {
+						title: '分享统计',
+						icon: 'customerservice_fill',
+						count: 657,
+						color: '#ed3f14',
+						url : "/service"
+					}, */
+					/*
 					{
 						title: '负载均衡测试1',
 						icon: 'md-help-circle',
 						color: '#ff9900',
 						url :'/balance',
-					},
-					/*
-					{
-						title: '分享统计',
-						icon: 'md-share',
-						count: 657,
-						color: '#ed3f14'
-					},
-					{
+					},{
 						title: '新增互动',
 						icon: 'md-chatbubbles',
 						count: 12,
@@ -73,10 +76,30 @@
 					}*/
 				],
 			}
+		},
+		mounted() {
+			console.log(this.config)
+		},
+		methods:{
+			
 		}
 	}
 </script>
 
 <style>
-
+    .i-icon {
+        display: inline-block;
+        font-family: 'custom-font' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        text-rendering: auto;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        vertical-align: middle;
+    }
+	.i-icon-customerservice_fill:before { content: "\E6FB";}
 </style>

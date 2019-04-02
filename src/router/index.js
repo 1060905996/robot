@@ -15,13 +15,17 @@ export default new Router({
 			name: 'gram',
 			component: gram
 		},{
+			path: '/chat',
+			name: 'chat',
+			component:  () => import('@/view/chat')
+		},{
 			path: '/speech',
 			name: 'speech',
 			component:  () => import('@/view/speech')
 		},{
-			path: '/balance',
-			name: 'balance',
-			component:  () => import('@/view/balance')
+			path: '/service',
+			name: 'service',
+			component:  () => import('@/view/service')
 		},
 	]
 })
