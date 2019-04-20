@@ -18,14 +18,6 @@ export default new Router({
 			path: '/chat',
 			name: 'chat',
 			component:  () => import('@/view/chat')
-		},{
-			path: '/speech',
-			name: 'speech',
-			component:  () => import('@/view/speech')
-		},{
-			path: '/service',
-			name: 'service',
-			component:  () => import('@/view/service')
-		},
+		}
 	]
 })

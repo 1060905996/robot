@@ -60,7 +60,6 @@
 				</div>
 				<div>
 					<div style="float: left;">
-						<!-- <Icon title="麦克风" :type="openmicro?'ios-mic':'ios-mic-off'" @click.native="change('openmicro')" size="24" :class="[{'open':openmicro}]" :style="{margin: '0 0px 0 10px'}" /> -->
 						<Icon title="扬声器" :type="openvoice?'md-volume-up':'md-volume-off'" size="24" @click.native="change('openvoice')" :class="[{'open':openvoice}]" :style="{margin: '0 10px'}" />
 					</div>
 					<div class="iconRight" style="float: right;">
@@ -74,9 +73,6 @@
 						<div class="div1">
 							<i-button @click="query">发送(Enter)</i-button>
 						</div>
-					</div>
-					<div v-show="openmicro">
-						<microphone @stoped="microphoneStop" :size="100"></microphone>
 					</div>
 				</div>
 			</Content>
@@ -93,7 +89,6 @@
 </template>
 
 <script>
-	import microphone from '@/components/microphone'
 	export default {
 		name: 'gram',
 		data: function() {
@@ -129,8 +124,6 @@
 			// padding 20 图标24
 			var screeHeight = height * 0.7;
 			var inputHeght = height - screeHeight;
-			console.log("显示高度:" + screeHeight);
-			console.log("输入高度:" + inputHeght);
 			if (inputHeght > 120) inputHeght = 120;
 			this.siderFront={height:(height*0.8)+"px",overflow: 'auto'}
 			this.screeFront = {height: screeHeight + "px"};
@@ -141,33 +134,7 @@
 			change(flag) {
 				this[flag] = !this[flag]
 			},
-			/* microphoneStop(blob) {
-				var begin =new Date().getTime();
-				var reader = new FileReader();
-				reader.readAsDataURL(blob);
-				var $=this.$http;
-				var start =new Date().getTime();
-				// 科大讯飞
-				 reader.onload = function (e) { 					
-					var baseCode= this.result.substring(this.result.indexOf(',')+1);//.substring(this.result.indexOf(',')+1);
-					$.post('iat/voiceQuery',{userId:this.userId,voiceBaseCode:baseCode}).then(function(data){
-						var end =new Date().getTime();
-						console.log("讯飞耗时:"+(end-begin)/1000.0)
-						this.getRespData(data.body,data.body.question);
-					});
-				}; 
-				 var begin2 = new Date().getTime();
-				// 百度云
-				let formData = new FormData();
-				formData.append('file', blob);
-				formData.append('deviceId', this.deviceId);
-				formData.append("userId",this.userId);
-				this.$http.post('SpeAbility/voiceQuery', formData).then(function(data) {
-					var end = new Date().getTime();
-					console.log("百度耗时:" + (end - begin2) / 1000.0);
-					this.getRespData(data.body,data.body.question);
-				}); 
-			}, */
+
 			query() {
 				var queryMessage=this.queryMessage.replace("\n","").trim();
 				if(queryMessage==undefined||queryMessage==null){
@@ -321,9 +288,7 @@
 					this.S4());
 			}
 		},
-		components: {
-			microphone
-		},
+		
 		computed: {
 			rotateIcon() {
 				return [

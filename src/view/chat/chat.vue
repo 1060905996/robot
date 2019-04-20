@@ -1,11 +1,11 @@
 <template>
 	<div class="abs cover contaniner">
 		<div class="abs cover pnl">
-			<div class="abs top pnl-head" id="pnlHead">
-				<img src="../../assets/chat/images/14919596515.png" class="pnl-hl" id="siteLogo">
+			<div class="abs top pnl-head" id="pnlHead" :style="{backgroundImage:'url(' + head_jpg + ')',backgroundColor:'rgb(36, 44, 51)'}">
+				<img src="../../assets/chat/images/DMC_AI_LOGO.png" class="pnl-hl" id="siteLogo">
 				<div class="pnl-site hide" id="siteName" style="color: rgb(236, 236, 236);">文思海辉北京金信科技有限公司</div>
 				<div class="pnl-worker abs left">
-					<div class="pnl-worker-photo" id="workerPhoto" style="background-image: url(' ../../assets/chat/images/14761555537.png);">
+					<div class="pnl-worker-photo" id="workerPhoto" style="background-image: url(../../assets/chat/images/14761555537.png);">
 						<i class="ic kh pnl-worker-icon kh-bg" id="workerIcon"></i>
 					</div>
 					<div class="pnl-worker-text">
@@ -60,7 +60,7 @@
 								<div class="msg robot" key="index"> 
 								<!-- " -->
 									<div class="msg-left">
-										<div class="msg-host photo" id="welcomeIcon" v-bind:style="{backgroundImage:'url(' + xiaowen_pactera + ')'}"></div>
+										<div class="msg-host photo" id="welcomeIcon" v-bind:style="{backgroundImage:'url(' + xiaowen_jpg + ')'}"></div>
 										<div class="msg-ball" id="welcomeBall" >
 											<span v-html="chat.screenShow"></span>
 											<span v-for="(link,index) in chat.links" @click="go(link.text)" key="index">
@@ -143,14 +143,14 @@
 				<div class="abs right pnl-right">
 					<!-- 轮播图 hide控制显隐 20em * 10em (260px * 130px) -->
 					<ul class="slider">
-						<li class="slider-item slider-item1"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/151522301410.png"
+						<li class="slider-item slider-item1"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/rel-item-2.jpg"
 							 alt="图片不存在"></li>
-						<li class="slider-item slider-item2"></li>
+						<!-- <li class="slider-item slider-item2"></li>
 						<li class="slider-item slider-item3"></li>
 						<li class="slider-item slider-item4"></li>
-						<li class="slider-item slider-item5"></li>
+						<li class="slider-item slider-item5"></li> -->
 					</ul>
-					<ul class="indicator">
+					<!-- <ul class="indicator">
 						<li>
 							<div class="focus-item focus-item1"></div>
 						</li>
@@ -166,7 +166,7 @@
 						<li>
 							<div class="focus-item focus-item5"></div>
 						</li>
-					</ul>
+					</ul> -->
 					<div class="pnl-right-content" style="top: 146px;">
 						<div class="pnl-tabs">
 							<div class="tab-btn active" id="hot-tab">常见问题</div>
@@ -203,9 +203,9 @@
 		</div>
 	</div>
 </template>
-
 <script>
-	import xiaowen from '../../assets/chat/images/14761555537.png'
+	import xiaowen from '../../assets/chat/images/xiaowen_logo.png'
+	import head from '../../assets/chat/images/149733084010.jpg'
 	export default {
 		name: 'chat',
 		data: function() {
@@ -216,7 +216,8 @@
 				deviceId : "chat-0001",
 				msgbannerShow : true,
 				url : this.config.server.queryMessageUrl,
-				xiaowen_pactera:xiaowen
+				xiaowen_jpg:xiaowen,
+				head_jpg: head
 			}
 		},
 		created(){
