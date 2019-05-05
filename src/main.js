@@ -18,7 +18,7 @@ Vue.use(iView)
 Vue.use(VueResource)
 
 Vue.config.productionTip = false
-Vue.http.options.root='http://116.228.202.222:18180/'
+Vue.http.options.root='http://116.228.202.222:18680/'
 //Vue.http.options.root='http://localhost:8180/'
 //Vue.http.options.emulateJSON = true;
 Vue.http.options.headers = {

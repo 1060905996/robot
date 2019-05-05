@@ -239,13 +239,16 @@
 					var links = resp.richText.richContent.links;
 					var messageId = resp.messageId;
 					if(links==undefined || links.length==0){
-						links = [];
-						var questionList = resp.recommendText.questionList;
-						if(questionList!=undefined){
-							questionList.forEach(q=>{
-								links.push({text:q,url:"javascript:void(0)"});
-							})
+						if(resp.recommendText!=undefined){
+							links = [];
+							var questionList = resp.recommendText.questionList;
+							if(questionList!=undefined){
+								questionList.forEach(q=>{
+									links.push({text:q,url:"javascript:void(0)"});
+								})
+							}
 						}
+						
 					}
 					this.chatList.push({type:'robot',screenShow:screenShow,links:links,messageId:messageId,isComment:'0'});
 					this.$nextTick(function(){
