@@ -32,8 +32,15 @@
 		data() {
 			return {
 				msg: 'Welcome to DMC Robot',
-				inforCardData: [{
+				inforCardData: [
+					{
 						title: '金融智脑',
+						icon: ' iconfont icon-chongxinhuihua',
+						color: '#19be6b',
+						url :'/dialogue'
+						
+					},{
+						title: '建行机器人',
 						icon: 'ios-outlet-outline',
 						color: '#2d8cf0',
 						url :'/gram'
@@ -42,14 +49,8 @@
 						icon: ' iconfont icon-head-set',
 						color: '#9A66E4',
 						url :'/chat'
-					} 
-					/* {
-						title: '语音测试',
-						icon: 'md-mic',
-						color: '#19be6b',
-						url :'/speech'
-						
-					}, {
+					},
+					 /* {
 						title: '分享统计',
 						icon: 'customerservice_fill',
 						count: 657,

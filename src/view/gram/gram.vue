@@ -168,7 +168,7 @@
 					alert(data.errorMsg);
 					return;
 				}
-				// 开始展示
+				// 数据整理
 				this.queryMessage="";
 				var respData = {};
 				var answerId = data.answerId;
@@ -198,7 +198,7 @@
 				}
 				this.show(respData);
 			},
-			show(respData) {
+			show(respData) {  //显示
 				if (this.openvoice) { // 扬声器播报tts
 					this.speech(respData.tts);
 				}

@@ -1,0 +1,43 @@
+{
+    "guideCellIconInfo": {
+		"default":{"icon": "icon15","bgcolor": "rgba(60,122,254,0.9)"},
+		"理财":{"icon": "icon15","bgcolor": "rgba(60,122,254,0.9)"},
+		"取款":{"icon": "icon18","bgcolor": "rgba(104,209,61,0.9)"},
+		"保险":{"icon": "icon6","bgcolor": "rgba(27,228,165,0.9)"},
+		"转账":{"icon": "icon7","bgcolor": "rgba(216,120,48,0.9)"},
+		"信用卡":{"icon": "icon19","bgcolor": "rgba(227,209,24,0.9)"},
+		"开户":{  "icon": "icon2","bgcolor": "rgba(78,132,249,0.9)"},
+		"公积金":{"icon": "icon17","bgcolor": "rgba(254,143,60,0.9)"},
+		"绑卡":{"icon": "icon20","bgcolor": "rgba(242,173,41,0.9)"},
+		"存款":{"icon": "icon13","bgcolor": "rgba(7,115,243,1)"},
+		"银行卡密码":{ "icon": "icon20","bgcolor": "rgba(27,143,221,0.9)"},
+		"修改密码":{ "icon": "icon4","bgcolor": "rgba(27,143,221,0.9)"},
+		"手机银行":{ "icon": "shoujiyinhang","bgcolor": "rgba(27,143,221,0.9)"}
+	},
+    "funItemsInfo": {
+		"default":{"icon": "icon-renwu","isSelect": false},
+		"手机银行购买":{"icon": "icon-shoujiyinhanggoumai","isSelect": false},
+		"呼叫大堂经理":{"icon": "icon-hujiaodatangjingli","isSelect": false},
+		"理财产品取号":{"icon": "icon-licaiquhao","isSelect": false},
+		"活期":{"icon":"icon-icon14","isSelect": false},
+		"定期":{"icon":"icon-icon16","isSelect": false},
+		"开户":{"icon":"icon-kaihu","isSelect": false},
+		"公司":{"icon":"icon-gongsi","isSelect": false},
+		"手机银行":{"icon":"icon-shoujiyinhang","isSelect": false},
+		"全部":{"icon":"icon-quanbu","isSelect": false},
+		"缺少提示":{"icon":"icon-queshaotixing","isSelect": false},
+		"银行卡":{"icon":"icon-icon19","isSelect": false},
+		"存单":{"icon": "icon-icon11","isSelect": false}
+	},
+	"expand":{
+		"灵活型":"活期","定期转活期":"活期","活期存折":"活期",
+		"固定型":"定期","定期存折":"定期",
+		"代办个人开户":"开户","开过":"开户",
+		"对公开户":"公司",
+		"带了":"全部",
+		"没带":"缺少提示",
+		"开通手机银行":"手机银行",
+		"取号":"理财产品取号","我要取号":"理财产品取号",
+		"储蓄卡":"银行卡"
+	}
+}

@@ -11,9 +11,10 @@ import 'iview/dist/styles/iview.css'    // 使用 CSS
 import './assets/iconfont/iconfont.css'  //使用自定义图标
 
 import config from  './config'
-
+import Bus from 'vue'
 Vue.prototype.config = config;
-console.log(config)
+Vue.prototype.bus = new Bus();
+
 Vue.use(iView)
 Vue.use(VueResource)
 
