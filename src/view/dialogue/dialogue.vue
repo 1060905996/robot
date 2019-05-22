@@ -46,7 +46,7 @@
 		},
 		data(){
 			return {
-				deviceId:"gram-0001",
+				deviceId:"gram-0002",
 				platformId:99,
 				queryMessage: '',
 				imgServer: this.config.server.imgServerUrl,
@@ -61,7 +61,6 @@
 		},
 		created() {
 			this.userId = this.config.guid(); //用户编号
-			console.log(this.userId)
 			this.backHome();
 		},
 		methods:{
@@ -111,11 +110,18 @@
 			imageStep(step) {
 			    //上一步、下一步
 			},
+			speech(msg) {
+				var speech = new SpeechSynthesisUtterance(msg);
+				window.speechSynthesis.speak(speech);
+			},
 			getRespData(data){
 				var respData = {};
+				var tts = data.richText.richContent.tts;
+				this.speech(tts);
 				var answerId = data.answerId;
 				var richType = data.richText.richType;
 				respData.type = richType+answerId;
+				
 				if (answerId == '1') {
 					if (richType == 'guiding') { // 特殊处理
 						respData.tts = data.richText.richContent.tts;
@@ -139,6 +145,9 @@
 						respData.wordArray = data.recommendText.questionList;
 						respData.question = data.question;
 						respData.promptVagueMsg = data.recommendText.recommondMsg;
+						respData.btnCancel = data.richText.richContent.btnCancel;
+						respData.btnPre = data.richText.richContent.btnPre;
+						respData.btnNext = data.richText.richContent.btnNext;
 						this.returnData= respData;
 					} else if (answerId == "3") {
 						respData.tts = data.richText.richContent.tts;

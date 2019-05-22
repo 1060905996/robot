@@ -1,5 +1,6 @@
 <template>
     <div class="issue-content">
+		 <p class="p2">{{ data.screenShow }}</p>
         <p class="user-sub-question">{{ data.promptVagueMsg }}</p>
         <ul v-show="showCluesList">
             <li v-for="(item, index) in data.wordArray" :key="index" @click.stop="selectItem(item)">
@@ -135,5 +136,15 @@ li {
 .icon-right {
     color: rgba(231, 202, 141, 0.8);
     font-size: 16px;
+}
+
+.p2 {
+    margin: 0 120px 0 12%;
+    font-size: 18px;
+    line-height: 25px;
+	z-index: 999;
+}
+p {
+    color: rgba(255, 255, 255, 0.9);
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<!-- :class="{'item-select' : itemInfo.isSelect}" -->
-    <div class="items"  @click="actionForItem">
+    <div class="items"  @click="actionForItem" :title="title">
         <div class="iconfont" :class="itemInfo.icon"></div>
         <div class="item-title">{{ title }}</div>
     </div>
@@ -49,7 +49,8 @@ export default {
 .items {
     display: inline-block;
    /* margin: 42px 10px 0 10px; */
-    margin: 10px 10px 0 10px;
+    margin: 0px 10px 0 10px;
+	vertical-align:text-top;
 }
 .items .iconfont {
     color: rgba(255, 255, 255, 0.8);
@@ -71,6 +72,7 @@ export default {
     line-height: 22px;
 	width: 106px;
 	word-wrap: break-word;
+	
 }
 .item-select {
     /* margin: 42px 10px 10px 10px; */

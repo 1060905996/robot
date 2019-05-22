@@ -35,20 +35,12 @@ export default {
     },
     mounted() {
 		var iconItem = this.configArr[this.title];		
-		console.log(iconItem + "  " + this.title);
 		if(iconItem==undefined){
 			iconItem=this.configArr["default"];
 		}
-		console.log(iconItem);
 		this.iconName = iconItem.icon;
 		this.bgColor = iconItem.bgcolor;
-        /* for (let i = 0; i < this.configArr.length; i++) {
-            var item = this.configArr[i];
-            if (item.title === this.title) {
-                this.iconName = item.icon;
-                this.bgColor = item.bgcolor;
-            }
-        } */
+      
     }
 };
 </script>

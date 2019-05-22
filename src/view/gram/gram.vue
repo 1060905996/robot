@@ -141,9 +141,10 @@
 					this.$Message.info('输入不能为空!');
 					return ;
 				}			
-				var data={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId};
+				var req={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId};
 				this.queryMessage="";
-				this.$http.post(this.url+'query',JSON.stringify(data)).then(function(data) {
+				console.log(req)
+				this.$http.post(this.url+'query',JSON.stringify(req)).then(function(data) {
 					console.log(data);
 					this.getRespData(data.body,queryMessage);					
 				});

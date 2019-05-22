@@ -38,9 +38,9 @@ export default {
 @import "../../../assets/iconfont/iconfont.css";
 .items-content {
     padding-top: 1px;
-    /* height: 200px; */
 	height: 120px;
     text-align: center;
     width: 100%;
 }
+
 </style>
