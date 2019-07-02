@@ -116,7 +116,7 @@
 			}
 		},
 		created() {
-			this.userId = this.guid(); //用户编号
+			this.userId = this.config.guid(); //用户编号
 		},
 		mounted() {
 			var height = window.screen.availHeight;
@@ -141,7 +141,8 @@
 					this.$Message.info('输入不能为空!');
 					return ;
 				}			
-				var req={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId};
+				var messageId = this.config.guid().replace(/-/g,"");
+				var req={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId,messageId:messageId};
 				this.queryMessage="";
 				console.log(req)
 				this.$http.post(this.url+'query',JSON.stringify(req)).then(function(data) {
@@ -172,7 +173,7 @@
 				// 数据整理
 				this.queryMessage="";
 				var respData = {};
-				var answerId = data.answerId;
+				var answerId = this.config.simplifyAnswerId(data.answerId);
 				if (answerId == '1') {
 					var type = data.richText.richType;
 					if (type == 'guiding') { // 特殊处理
@@ -281,13 +282,6 @@
 				this.openmicro = !this.openmicro;
 				console.log(this.openmicro);
 			},
-			S4() {
-				return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-			},
-			guid() {
-				return (this.S4() + this.S4() + "-" + this.S4() + "-" + this.S4() + "-" + this.S4() + "-" + this.S4() + this.S4() +
-					this.S4());
-			}
 		},
 		
 		computed: {

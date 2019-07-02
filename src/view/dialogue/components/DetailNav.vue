@@ -93,7 +93,7 @@ export default {
   border: 3px solid #e0f4e0;
 
   z-index: 0;
-
+  border-radius: 5px;
 }
 .balloon-left:before {
 

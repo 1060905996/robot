@@ -22,6 +22,10 @@ export default new Router({
 			path: '/dialogue',
 			name: 'dialogue',
 			component:  () => import('@/view/dialogue')
+		},{
+			path: '/integration',
+			name: 'integration',
+			component:  () => import('@/view/integration')
 		}
 	]
 })

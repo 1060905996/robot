@@ -2,10 +2,12 @@
 
 
 let server={
-	 imgServerUrl:"http://192.168.1.91:8080/",
-	/*queryServerUrl:"http://116.228.202.222:18180/", */
-	queryServerUrl:"/",queryMessageUrl:"/",
+	 imgServerUrl:"http://116.228.202.222:18080/", 
+	 queryServerUrl:"/",			//金融智脑 和 建行机器人 接口
+	 queryMessageUrl:"/",			// 智能客服
+	 answerMap:{"0100":"1","0110":"2","0120":"2","0200":"1","0210":"2","0300":"1","0310":"2","0400":"1","0500":"1","8000":"3","9990":"3","9991":"2","9999":"3"}, // 报文answerId和页面类型对照
 }
+
 // uuid
 let guid = function(){
 	function S4() {
@@ -15,16 +17,21 @@ let guid = function(){
 	return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() +
 		S4());
 	
-}
+};
+
 /**
  * 获取显示类型
  */
-let answerId
 let simplifyAnswerId =  function(answerId){
-	
+	var t =server.answerMap[answerId];
+	if(t ==undefined){
+		return answerId;
+	}
+	return t;
 }
 
 export default{
 	server,
 	guid,
+	simplifyAnswerId,
 }

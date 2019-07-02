@@ -13,10 +13,10 @@
 		        <BottomBar :data="CenterBtns" @go="itemSelect"/> 
 		    </div>           
 		</div>
-       <!-- <div class="some-img-content" v-show="showSomeImg">
+       <div class="some-img-content" v-show="showSomeImg">
             <ul ref="imgList">
-                <li v-for="(item, index) in data.imageArr" :key="index" ref="imgListCell">
-                    <img :src="item">
+                <li v-for="(item, index) in imageArr" :key="index" ref="imgListCell">
+                    <img :src="item.url" @click="itemSelect(item.goMessage)">
                 </li>
             </ul>
             <div class="page-turning" v-show="showPageTurn">
@@ -31,7 +31,7 @@
                     @click="nextPage"
                 ></i>
             </div>
-        </div> -->
+        </div>
 		 <div
 		    class="step-btn step-btn-left"
 		    :class="{'step-btn-activated' : showPreBtn}"
@@ -66,6 +66,7 @@ export default {
             curPage: 1 ,//当前页
 			imgServer: this.config.server.imgServerUrl,
 			img:"",
+			imageArr:[],
 			CenterBtns:[],
         };
     },
@@ -76,7 +77,7 @@ export default {
     },
     methods: {
 		itemSelect(query){
-			console.log(query);
+			if(query==undefined || query.length==0) return;
 			this.$emit("query",query);
 		},
         prePage() {
@@ -104,10 +105,10 @@ export default {
             this.curPage += 1;
         },
         getTotalPage() {
-          /*  this.$nextTick(() => {
+            this.$nextTick(() => {
                 var listWidth = this.$refs.imgList.scrollWidth;
                 this.totalPage = Math.ceil(listWidth / this.screenWidth);
-            }); */
+            }); 
         }
     },
     computed: {
@@ -126,8 +127,9 @@ export default {
             return false;
         },
        showSingleImg() {
-            if (this.data.btnCenters &&this.data.btnCenters.images && this.data.btnCenters.images.length>0) {
+            if (this.data.btnCenters &&this.data.btnCenters.images && this.data.btnCenters.images.length==1) {
 					this.img=this.imgServer+this.data.btnCenters.images[0].imgUrl;
+					this.getTotalPage();
 					return true;
             } 
             return false;
@@ -153,6 +155,7 @@ export default {
 						});
 					}
 					this.data.btnBottoms = [];
+					this.getTotalPage();
 					return true;
 				}
 				
@@ -160,9 +163,14 @@ export default {
 			return false;
 		},
         showSomeImg() {
-           /* if (this.data.btnCenters.images.length > 1) {
-                return false;
-            } */
+            if (this.data.btnCenters &&this.data.btnCenters.images &&this.data.btnCenters.images.length > 1) {
+				this.imageArr= [];
+				this.data.btnCenters.images.forEach(it=>{
+					this.imageArr.push({url:this.imgServer+it.imgUrl,goMessage:it.goMessage});
+				});
+				this.getTotalPage();
+                return true;
+            } 
             return false;
         },
         showPageTurn() {

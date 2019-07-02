@@ -45,7 +45,7 @@
 						color: '#2d8cf0',
 						url :'/gram'
 					} ,{
-						title: '语音客服',
+						title: '智脑客服',
 						icon: ' iconfont icon-head-set',
 						color: '#9A66E4',
 						url :'/chat'

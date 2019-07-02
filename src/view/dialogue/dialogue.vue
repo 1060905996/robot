@@ -80,7 +80,8 @@
 					this.$Message.info('输入不能为空!');
 					return ;
 				}			
-				var data={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId};
+				var messageId = this.config.guid().replace(/-/g,"");
+				var data={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId,messageId:messageId};
 				this.queryMessage="";
 				
 				 console.log("url: "+this.url+'query');
@@ -116,12 +117,11 @@
 			},
 			getRespData(data){
 				var respData = {};
-				var tts = data.richText.richContent.tts;
-				this.speech(tts);
-				var answerId = data.answerId;
+				var answerId = this.config.simplifyAnswerId(data.answerId);
 				var richType = data.richText.richType;
 				respData.type = richType+answerId;
 				
+				console .log("simplifyAnswerId:"+answerId);
 				if (answerId == '1') {
 					if (richType == 'guiding') { // 特殊处理
 						respData.tts = data.richText.richContent.tts;
@@ -132,6 +132,14 @@
 						respData.tts = data.richText.richContent.tts;
 						respData.screenShow = data.richText.richContent.screenShow;
 						respData.btnCenters = data.richText.richContent.btnCenters;
+						
+						
+						/* if(respData.btnCenters!=undefined || respData.btnCenters!=undefined){
+							if(respData.btnCenters.images!=undefined )
+								respData.btnCenters.images.push({"imgUrl":"/resource/images/STM.jpg","isShow":"1"})
+						} */
+						
+						
 						respData.btnBottoms = data.richText.richContent.btnBottoms;
 						respData.btnPre = data.richText.richContent.btnPre;
 						respData.btnNext = data.richText.richContent.btnNext;
@@ -139,7 +147,7 @@
 						respData.question = data.question;
 						this.returnData= respData;
 					}
-				}else if (answerId == "2") {
+				}else if (answerId == "2" || answerId =="4") {
 						respData.tts = data.recommendText.tts;
 						respData.screenShow = data.recommendText.screenShow;
 						respData.wordArray = data.recommendText.questionList;
@@ -155,6 +163,7 @@
 						respData.question = data.question;
 						this.returnData= respData;
 					}
+					this.speech(respData.tts);
 			},
 			
 		},
@@ -170,7 +179,6 @@
 			   return true;
 			},
 			showDetailNav() {
-				console.log("showDetailNav : "+this.returnData.type )
 			    if (this.returnData.type != "guiding1") {
 			        return true;
 			    }

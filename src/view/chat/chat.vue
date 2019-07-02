@@ -2,7 +2,7 @@
 	<div class="abs cover contaniner">
 		<div class="abs cover pnl">
 			<div class="abs top pnl-head" id="pnlHead" :style="{backgroundImage:'url(' + head_jpg + ')',backgroundColor:'rgb(36, 44, 51)'}">
-				<img src="../../assets/chat/images/DMC_AI_LOGO.png" class="pnl-hl" id="siteLogo">
+				<img src="../../assets/chat/images/DMC_AI_LOGO6.png" class="pnl-hl" id="siteLogo">
 				<div class="pnl-site hide" id="siteName" style="color: rgb(236, 236, 236);">文思海辉北京金信科技有限公司</div>
 				<div class="pnl-worker abs left">
 					<div class="pnl-worker-photo" id="workerPhoto" style="background-image: url(../../assets/chat/images/14761555537.png);">
@@ -47,7 +47,7 @@
 								<strong>公告：</strong>欢迎体验小文智能客服，请发送消息体验对话！
 							</div>
 						</div>
-						<div class="msg min time" id="histStart">今天 22:17:49</div>
+						<!-- <div class="msg min time" id="histStart">今天 22:17:49</div> -->
 						<div class="pnl-list" id="hists">
 							<!-- 历史消息 -->
 						</div>
@@ -63,7 +63,8 @@
 										<div class="msg-host photo" id="welcomeIcon" v-bind:style="{backgroundImage:'url(' + xiaowen_jpg + ')'}"></div>
 										<div class="msg-ball" id="welcomeBall" >
 											<span v-html="chat.screenShow"></span>
-											<span v-for="(link,index) in chat.links" @click="go(link.text)" key="index">
+											<span v-html="chat.promptVagueMsg"></span>
+											<span v-for="(link,index) in chat.links" @click="go(link.text)" :key="index">
 												<div class="msg-relques" style="">
 													<!-- <span   v-text=""></span> -->
 													<a :href="link.url" class="msg-anchor" title="点击发送问题">{{index+1}}.{{link.text}}</a>
@@ -141,32 +142,25 @@
 					</div>
 				</div>
 				<div class="abs right pnl-right">
-					<!-- 轮播图 hide控制显隐 20em * 10em (260px * 130px) -->
-					<ul class="slider">
-						<li class="slider-item slider-item1"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/rel-item-2.jpg"
-							 alt="图片不存在"></li>
-						<!-- <li class="slider-item slider-item2"></li>
-						<li class="slider-item slider-item3"></li>
-						<li class="slider-item slider-item4"></li>
-						<li class="slider-item slider-item5"></li> -->
-					</ul>
-					<!-- <ul class="indicator">
-						<li>
-							<div class="focus-item focus-item1"></div>
-						</li>
-						<li>
-							<div class="focus-item focus-item2"></div>
-						</li>
-						<li>
-							<div class="focus-item focus-item3"></div>
-						</li>
-						<li>
-							<div class="focus-item focus-item4"></div>
-						</li>
-						<li>
-							<div class="focus-item focus-item5"></div>
-						</li>
-					</ul> -->
+					 <Carousel autoplay v-model="value2" loop>
+						<CarouselItem>
+							<div class="demo-carousel"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/5.jpg"
+							 alt="图片不存在"></div>
+						</CarouselItem>
+						<CarouselItem>
+							<div class="demo-carousel"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/6.jpg"
+							 alt="图片不存在"></div>
+						</CarouselItem>
+						<CarouselItem>
+							<div class="demo-carousel"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/7.jpg"
+							 alt="图片不存在"></div>
+						</CarouselItem>
+						<CarouselItem>
+							<div class="demo-carousel"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/8.jpg"
+							 alt="图片不存在"></div>
+						</CarouselItem>
+					</Carousel>
+					
 					<div class="pnl-right-content" style="top: 146px;">
 						<div class="pnl-tabs">
 							<div class="tab-btn active" id="hot-tab">常见问题</div>
@@ -179,9 +173,18 @@
 								<li class="rel-item" title="点击发送问题" @click="go('你多少岁了？')">你多少岁了？</li>
 								<li class="rel-item" title="点击发送问题" @click="go('你会做什么？')">你会做什么？</li>
 								<li class="rel-item" title="点击发送问题" @click="go('你厉害还是小艾同学厉害？')">你厉害还是小艾同学厉害？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('有什么贷款产品？')">有什么贷款产品？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('余额查询？')">余额查询？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('我的贷款额度是多少？')">我的贷款额度是多少？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('什么时候发工资？')">什么时候发工资？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('工资怎么发放？')">工资怎么发放？</li>		
+								<li class="rel-item" title="点击发送问题" @click="go('怎么查询工资？')">怎么查询工资？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('怎样申请调薪？')">怎样申请调薪？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('什么是税前异动？')">什么是税前异动？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('工资有误怎么办？')">工资有误怎么办？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('个税怎么扣缴？')">个税怎么扣缴？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('加班费有什么规定？')">加班费有什么规定？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('工资卡有什么要求？')">工资卡有什么要求？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('计薪是算一整个月的吗？')">计薪是算一整个月的吗？</li>
+								
+														
 							</ul>
 						</div>
 					<!-- 	<div class="pnl-rel" style="display: none;">
@@ -221,7 +224,7 @@
 			}
 		},
 		created(){
-			this.userId = this.guid();
+			this.userId = this.config.guid();
 		},
 		methods:{
 			query(){
@@ -231,33 +234,58 @@
 					 return;
 				} 
 				this.chatList.push({type:'guest',screenShow:question,title:this.getDateTime()});
-				
-				this.$http.post(this.url+"queryMessage",{userId:this.userId,query:question,deviceId:this.deviceId}).then(function(data){
+				this.$nextTick(function(){
+				  /*DOM更新了*/
+				   this.$refs.msgs.scrollTop = this.$refs.msgs.scrollHeight;
+				})
+				var messageId = this.config.guid().replace(/-/g,"");
+				this.$http.post(this.url+"queryMessage",{userId:this.userId,query:question,deviceId:this.deviceId,messageId:messageId}).then(function(data){
 					console.log(data);
 					var resp =  data.body;
-					var screenShow = resp.richText.richContent.screenShow;
-					var links = resp.richText.richContent.links;
-					var messageId = resp.messageId;
-					if(links==undefined || links.length==0){
-						if(resp.recommendText!=undefined){
-							links = [];
-							var questionList = resp.recommendText.questionList;
-							if(questionList!=undefined){
-								questionList.forEach(q=>{
-									links.push({text:q,url:"javascript:void(0)"});
-								})
-							}
-						}
-						
-					}
-					this.chatList.push({type:'robot',screenShow:screenShow,links:links,messageId:messageId,isComment:'0'});
-					this.$nextTick(function(){
-					  /*DOM更新了*/
-					   this.$refs.msgs.scrollTop = this.$refs.msgs.scrollHeight;
-					})
+					this.show(resp);
 				});
 				this.question= "";
 				return false;
+			},
+			show(data){
+				var respData = {};
+				var answerId = this.config.simplifyAnswerId(data.answerId);
+				var richType = data.richText.richType;
+				respData.type = richType+answerId;
+				
+				console .log("simplifyAnswerId:"+answerId);
+				if (answerId == '1') {
+					if (richType == 'guiding') { // 特殊处理
+						respData.tts = data.richText.richContent.tts;
+						respData.screenShow = data.richText.richContent.screenShow;
+						respData.wordArray = data.richText.richContent.words;
+					} else if (richType == 'scene') {
+						respData.tts = data.richText.richContent.tts;
+						respData.screenShow = data.richText.richContent.screenShow;
+					}
+				}else if (answerId == "2" || answerId =="4") {
+						respData.tts = data.recommendText.tts;
+						respData.screenShow = data.recommendText.screenShow;
+						respData.questionList = data.recommendText.questionList;						
+						respData.promptVagueMsg = data.recommendText.recommondMsg;						
+					} else if (answerId == "3") {
+						respData.tts = data.richText.richContent.tts;
+						respData.screenShow = data.richText.richContent.screenShow;
+						respData.question = data.question;
+					}
+				var messageId = data.messageId;
+				var questionList = respData.questionList;
+				var links = [];
+				if(questionList!=undefined){
+					questionList.forEach(q=>{
+						links.push({text:q,url:"javascript:void(0)"});
+					})
+				}
+				this.chatList.push({type:'robot',screenShow:respData.screenShow,links:links,messageId:messageId,isComment:'0',promptVagueMsg:respData.promptVagueMsg});
+				this.$nextTick(function(){
+				  /*DOM更新了*/
+				   this.$refs.msgs.scrollTop = this.$refs.msgs.scrollHeight;
+				})
 			},
 			go(question){
 				this.question = question;
@@ -280,13 +308,6 @@
 				if(s<10) s="0"+s;
 				return `${h}:${m}:${s}`
 			},
-			S4() {
-				return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-			},
-			guid() {
-				return (this.S4() + this.S4() + "-" + this.S4() + "-" + this.S4() + "-" + this.S4() + "-" + this.S4() + this.S4() +
-					this.S4());
-			}
 		}
 	}
 </script>
