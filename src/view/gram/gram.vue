@@ -63,13 +63,14 @@
 						<Icon title="扬声器" :type="openvoice?'md-volume-up':'md-volume-off'" size="24" @click.native="change('openvoice')" :class="[{'open':openvoice}]" :style="{margin: '0 10px'}" />
 					</div>
 					<div class="iconRight" style="float: right;">
+						<Input title="终端编号" v-model="deviceId" placeholder="终端编号" style="width: 150px" />
 						<Icon  title="返回首页" @click.native="backIndex()" type="md-refresh-circle"  size="24" :style="{margin: '0 0px'}"/>
 						<Icon  @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
 					</div>
 				</div>
 				<div :style="[inputFront]">
 					<div v-show="!openmicro">
-						<Input v-model="queryMessage" type="textarea" @on-enter="query" placeholder="Enter something..." :autosize="{minRows:3,maxRows: 5}" />
+						<Input v-model="queryMessage"  type="textarea" @on-enter="query" placeholder="Enter something..." :autosize="{minRows:3,maxRows: 5}" />
 						<div class="div1">
 							<i-button @click="query">发送(Enter)</i-button>
 						</div>
@@ -98,7 +99,7 @@
 				openvoice: false,
 				queryHistory: [],
 				userId: "",
-				deviceId:"gram-0001",
+				deviceId:"GZ001",
 				platformId:99,
 				queryMessage: '',
 				imgServer: this.config.server.imgServerUrl,
@@ -140,13 +141,18 @@
 				if(queryMessage==undefined||queryMessage==null){
 					this.$Message.info('输入不能为空!');
 					return ;
-				}			
+				}
+				var deviceId = this.deviceId;
+				if(deviceId==undefined||deviceId==null){
+					this.$Message.info('终端编号不能为空!');
+					return ;
+				}
 				var messageId = this.config.guid().replace(/-/g,"");
 				var req={'deviceId':this.deviceId,'query':queryMessage,userId:this.userId,messageId:messageId};
 				this.queryMessage="";
 				console.log(req)
-				this.$http.post(this.url+'query',JSON.stringify(req)).then(function(data) {
-					console.log(data);
+				this.$http.post(this.url+'CSRBroker/queryMessage',JSON.stringify(req)).then(function(data) {
+					console.log(JSON.stringify(data.body));
 					this.getRespData(data.body,queryMessage);					
 				});
 			},
@@ -204,14 +210,14 @@
 				if (this.openvoice) { // 扬声器播报tts
 					this.speech(respData.tts);
 				}
-				var imgServer = this.imgServer;
 				this.screenShow = "";
 				if (respData.screenShow) {
 					this.screenShow = respData.screenShow;
+					console.log(this.screenShow);
 				}
 				this.btnCancel={show:false};
 				if (respData.btnCancel) {
-					this.btnCancel={show:true,src: imgServer + respData.btnCancel.imgUrl}
+					this.btnCancel={show:true,src:this.getImageUrl(respData.btnCancel.imgUrl)}
 				}
 				this.btnCenters={type:'',imgs:[]}
 				if (respData.btnCenters) {
@@ -219,15 +225,16 @@
 					if (buttons != null && buttons.length > 0) {
 						this.btnCenters={type:'btns',imgs:[]}
 						for (var i = 0; i < buttons.length; i++) {
-							this.btnCenters.imgs.push({src:imgServer + buttons[i].imgUrl,goMessage:buttons[i].goMessage,
+							this.btnCenters.imgs.push({src:this.getImageUrl(buttons[i].imgUrl),goMessage:buttons[i].goMessage,
 								textShow:buttons[i].textShow});
 						}
+						console.log()
 					}
 					var images = respData.btnCenters.images;
 					if (images != null && images.length > 0) {
 						this.btnCenters={type:'imgs',imgs:[]}
 						for (var i = 0; i < images.length; i++) {
-								this.btnCenters.imgs.push({src:imgServer + images[i].imgUrl});
+								this.btnCenters.imgs.push({src:this.getImageUrl(images[i].imgUrl)});
 						}
 					
 					}
@@ -235,19 +242,19 @@
 				this.btnNext={show:false};
 				if (respData.btnNext) {
 					this.btnNext.show=true;
-					this.btnNext.src= imgServer + respData.btnNext.imgUrl;
+					this.btnNext.src= this.getImageUrl( respData.btnNext.imgUrl);
 					this.btnNext.goMessage=respData.btnNext.goMessage;
 				}
 				this.btnPre={show:false};
 				if (respData.btnPre) {
 					this.btnPre.show=true;
-					this.btnPre.src= imgServer + respData.btnPre.imgUrl;
+					this.btnPre.src= this.getImageUrl( respData.btnPre.imgUrl);
 					this.btnPre.goMessage=respData.btnPre.goMessage;
 				}
 				this.btnBottoms=[]
 				if (respData.btnBottoms) {
 					for (var i = 0; i < respData.btnBottoms.length; i++) {
-							this.btnBottoms.push({src:imgServer + respData.btnBottoms[i].imgUrl,
+							this.btnBottoms.push({src:this.getImageUrl(respData.btnBottoms[i].imgUrl),
 												  textShow:respData.btnBottoms[i].textShow,
 												  goMessage:respData.btnBottoms[i].goMessage});
 					}
@@ -282,6 +289,12 @@
 				this.openmicro = !this.openmicro;
 				console.log(this.openmicro);
 			},
+			getImageUrl(imgUrl){
+				if(imgUrl==undefined ||imgUrl.length==0) return ;
+				var index = imgUrl.indexOf("resource/images/");
+				if(index==-1) return ;
+				return this.imgServer+imgUrl.substring(index);
+			}
 		},
 		
 		computed: {

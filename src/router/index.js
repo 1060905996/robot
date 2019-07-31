@@ -26,6 +26,10 @@ export default new Router({
 			path: '/integration',
 			name: 'integration',
 			component:  () => import('@/view/integration')
+		},{
+			path: '/ccb',
+			name: 'ccb',
+			component:  () => import('@/view/ccb')
 		}
 	]
 })

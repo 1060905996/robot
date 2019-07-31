@@ -44,6 +44,11 @@
 						icon: 'ios-outlet-outline',
 						color: '#2d8cf0',
 						url :'/gram'
+					},{
+						title: '建行机器人(原始版本)',
+						icon: 'ios-outlet-outline',
+						color: '#2d8cf0',
+						url :'/ccb'
 					} ,{
 						title: '智脑客服',
 						icon: ' iconfont icon-head-set',
