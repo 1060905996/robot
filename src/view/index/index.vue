@@ -54,6 +54,11 @@
 						icon: ' iconfont icon-head-set',
 						color: '#9A66E4',
 						url :'/chat'
+					},{
+						title: 'SSOC',
+						icon: ' iconfont icon-head-set',
+						color: '#9A66E4',
+						url :'/ssoc'
 					},
 					 /* {
 						title: '分享统计',

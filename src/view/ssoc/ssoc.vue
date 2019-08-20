@@ -142,7 +142,7 @@
 					</div>
 				</div>
 				<div class="abs right pnl-right">
-					 <Carousel autoplay v-model="value2" loop>
+					 <Carousel autoplay  loop>
 						<CarouselItem>
 							<div class="demo-carousel"><img style="width: 260px; height: 130px;" src="../../assets/chat/images/5.jpg"
 							 alt="图片不存在"></div>
@@ -173,17 +173,16 @@
 								<li class="rel-item" title="点击发送问题" @click="go('你多少岁了？')">你多少岁了？</li>
 								<li class="rel-item" title="点击发送问题" @click="go('你会做什么？')">你会做什么？</li>
 								<li class="rel-item" title="点击发送问题" @click="go('你厉害还是小艾同学厉害？')">你厉害还是小艾同学厉害？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('有什么贷款产品？')">有什么贷款产品？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('余额查询？')">余额查询？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('我的贷款额度是多少？')">我的贷款额度是多少？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('怎么办理信用卡')">怎么办理信用卡？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('信用卡有哪些分期业务')">信用卡有哪些分期业务？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('境外人士如何开银行卡')">境外人士如何开银行卡？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('如何办理手机银行')">如何办理手机银行？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('怎么下载手机银行')">怎么下载手机银行？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('我想贷款，帮我计算下每个月还多少钱')">我想贷款，帮我计算下每个月还多少钱？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('储蓄卡挂失')">储蓄卡挂失？</li>
-								<li class="rel-item" title="点击发送问题" @click="go('我要怎么提取公积金')">我要怎么提取公积金？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('什么时候发工资？')">什么时候发工资？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('工资怎么发放？')">工资怎么发放？</li>		
+								<li class="rel-item" title="点击发送问题" @click="go('怎么查询工资？')">怎么查询工资？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('怎样申请调薪？')">怎样申请调薪？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('什么是税前异动？')">什么是税前异动？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('工资有误怎么办？')">工资有误怎么办？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('个税怎么扣缴？')">个税怎么扣缴？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('加班费有什么规定？')">加班费有什么规定？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('工资卡有什么要求？')">工资卡有什么要求？</li>
+								<li class="rel-item" title="点击发送问题" @click="go('计薪是算一整个月的吗？')">计薪是算一整个月的吗？</li>	
 							</ul>
 						</div>
 					<!-- 	<div class="pnl-rel" style="display: none;">
@@ -238,7 +237,7 @@
 				   this.$refs.msgs.scrollTop = this.$refs.msgs.scrollHeight;
 				})
 				var messageId = this.config.guid().replace(/-/g,"");
-				this.$http.post(this.url+"queryMessage",{userId:this.userId,query:question,deviceId:this.deviceId,messageId:messageId}).then(function(data){
+				this.$http.post(this.url+"SSOC/queryMessage",{userId:this.userId,query:question,deviceId:this.deviceId,messageId:messageId}).then(function(data){
 					console.log(JSON.stringify(data));
 					var resp =  data.body;
 					this.show(resp);
@@ -254,24 +253,20 @@
 				
 				console .log("simplifyAnswerId:"+answerId);
 				if (answerId == '1') {
-					if (richType == 'guiding') { // 特殊处理
-						respData.tts = data.richText.richContent.tts;
-						respData.screenShow = data.richText.richContent.screenShow;
-						respData.wordArray = data.richText.richContent.words;
-					} else if (richType == 'scene') {
+					if (richType == 'scene') {
 						respData.tts = data.richText.richContent.tts;
 						respData.screenShow = data.richText.richContent.screenShow;
 					}
-				}else if (answerId == "2" || answerId =="4") {
+				}else if (answerId == "2") {
 						respData.tts = data.recommendText.tts;
 						respData.screenShow = data.recommendText.screenShow;
 						respData.questionList = data.recommendText.questionList;						
 						respData.promptVagueMsg = data.recommendText.recommondMsg;						
-					} else if (answerId == "3") {
-						respData.tts = data.richText.richContent.tts;
-						respData.screenShow = data.richText.richContent.screenShow;
-						respData.question = data.question;
-					}
+				} else if (answerId == "3") {
+					respData.tts = data.richText.richContent.tts;
+					respData.screenShow = data.richText.richContent.screenShow;
+					respData.question = data.question;
+				}
 				var messageId = data.messageId;
 				var questionList = respData.questionList;
 				var links = [];

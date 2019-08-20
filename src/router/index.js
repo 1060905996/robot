@@ -30,6 +30,10 @@ export default new Router({
 			path: '/ccb',
 			name: 'ccb',
 			component:  () => import('@/view/ccb')
+		},{
+			path: '/ssoc',
+			name: 'ssoc',
+			component:  () => import('@/view/ssoc')
 		}
 	]
 })
