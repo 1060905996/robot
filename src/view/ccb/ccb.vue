@@ -136,9 +136,11 @@
             alert(res.body.errorMsg);
             return;
           }
+					console.log(res);
+					var answerId = this.config.simplifyAnswerId(res.body.answerId);
           this.advertText = res.body.question;
           //如果答案类型为1
-          if (res.body.answerId == '1') {
+          if (answerId == '1') {
             //清除页面原有数据
             this.clearPage();
             this.type = res.body.richText.richType;
@@ -163,16 +165,18 @@
                 this.images = this.btnCenters.images;
               }
             } else if (type == "queue") {
+							this.clearPage();
               this.imageUrl = res.body.richText.richContent.imageUrl;
-              alert("答案1：queue");
+							this.btnCancel = res.body.richText.richContent.btnCancel;
             }
-          } else if (res.body.answerId == '2') {
+          } else if (answerId == '2') {
             this.clearPage();
             this.screenShow = res.body.recommendText.screenShow;
             this.wordArray = res.body.recommendText.questionList;
             this.promptVagueMsg = res.body.recommendText.recommondMsg;
-          } else if (res.body.answerId == '3') {
-            alert("答案3");
+          } else if (answerId == '3') {
+						this.clearPage();
+            this.screenShow = res.body.richText.richContent.screenShow;
           }
         });
         //清空问题输入框
@@ -209,15 +213,6 @@
     mounted() {
       this.goQueue();
     }
-
-    /*computed: {
-      rotateIcon() {
-        return [
-          'menu-icon',
-          this.isCollapsed ? 'rotate-icon' : ''
-        ];
-      }
-    }*/
   }
 </script>
 

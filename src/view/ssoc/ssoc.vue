@@ -237,7 +237,7 @@
 				   this.$refs.msgs.scrollTop = this.$refs.msgs.scrollHeight;
 				})
 				var messageId = this.config.guid().replace(/-/g,"");
-				this.$http.post(this.url+"SSOC/queryMessage",{userId:this.userId,query:question,deviceId:this.deviceId,messageId:messageId}).then(function(data){
+				this.$http.post(this.url+"queryMessage",{userId:this.userId,query:question,deviceId:this.deviceId,messageId:messageId}).then(function(data){
 					console.log(JSON.stringify(data));
 					var resp =  data.body;
 					this.show(resp);

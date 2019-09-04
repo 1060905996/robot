@@ -102,7 +102,7 @@
 				deviceId:"GZ001",
 				platformId:99,
 				queryMessage: '',
-				imgServer: this.config.server.imgServerUrl,
+				imgServer: "",
 				url : this.config.server.queryServerUrl,
 				btnNext:{show:false,textShow:"",goMessage:"",src:""},
 				btnPre:{show:false,textShow:"",goMessage:"",src:""},
