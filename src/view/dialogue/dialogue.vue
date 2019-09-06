@@ -49,7 +49,7 @@
 				deviceId:"gram-0002",
 				platformId:99,
 				queryMessage: '',
-				imgServer: this.config.server.imgServerUrl,
+				imgServer: "",
 				url : this.config.server.queryServerUrl,
 				guideList:[],
 				screenShow: '欢迎使用人工智脑!',
@@ -117,6 +117,11 @@
 			},
 			getRespData(data){
 				var respData = {};
+				if(data.result=='1'){
+					alert(data.errorMsg)
+					return;
+				}
+					
 				var answerId = this.config.simplifyAnswerId(data.answerId);
 				var richType = data.richText.richType;
 				respData.type = richType+answerId;
@@ -124,9 +129,12 @@
 				console .log("simplifyAnswerId:"+answerId);
 				if (answerId == '1') {
 					if (richType == 'guiding') { // 特殊处理
-						respData.tts = data.richText.richContent.tts;
+						/*respData.tts = data.richText.richContent.tts;
 						respData.screenShow = data.richText.richContent.screenShow;
-						respData.wordArray = data.richText.richContent.words;
+						respData.wordArray = data.richText.richContent.word;*/
+						respData.tts="请问您还有什么需要帮助吗？";
+						respData.screenShow="我是文思海辉智能机器人小文，您可以这样问我：";
+						respData.wordArray=[{"title": "信用卡","subtitle": "信用卡分期主动外呼"}, {"title": "公积金","subtitle": "提取公积金需要哪些材料？"}, {"title": "修改密码","subtitle": "我忘记公积金密码了?"}, {"title": "开户","subtitle": "我想开户"}, {"title": "取款",	"subtitle": "我想办理取款业务"}, {	"title": "理财","subtitle": "有什么理财产品?"}, {"title": "手机银行",	"subtitle": "怎么在手机银行上转账"}, {"title": "银行卡密码","subtitle": "修改银行卡密码"	}];
 						this.returnData= respData;		
 					} else if (richType == 'scene') {
 						respData.tts = data.richText.richContent.tts;

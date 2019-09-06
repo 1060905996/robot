@@ -64,7 +64,7 @@ export default {
                 document.body.clientWidth,
             totalPage: 0, //总页数
             curPage: 1 ,//当前页
-			imgServer: this.config.server.imgServerUrl,
+			imgServer: "",
 			img:"",
 			imageArr:[],
 			CenterBtns:[],
